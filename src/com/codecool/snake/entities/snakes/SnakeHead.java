@@ -48,8 +48,7 @@ public class SnakeHead extends GameEntity implements IAnimatedEntity {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof IPowerup) {
                     IPowerup powerup = (IPowerup) entity;
-                    addPart(powerup.getStrength());
-                    entity.destroy();
+                    powerup.apply(this);
                     System.out.println("got berry :)");
                 }
                 if (entity instanceof IEnemy) {
@@ -68,7 +67,7 @@ public class SnakeHead extends GameEntity implements IAnimatedEntity {
         }
     }
 
-    private void addPart(int numParts) {
+    public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;

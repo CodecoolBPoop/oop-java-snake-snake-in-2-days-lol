@@ -2,6 +2,7 @@ package com.codecool.snake.entities.powerups;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
@@ -19,10 +20,9 @@ public class SimplePowerup extends GameEntity implements IPowerup {
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
     }
 
-
     @Override
-    public int getStrength() {
-        return 5;
+    public void apply(SnakeHead snakeHead) {
+        snakeHead.addPart(4);
+        destroy();
     }
-
 }
