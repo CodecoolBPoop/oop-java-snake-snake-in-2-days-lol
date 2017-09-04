@@ -1,7 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.IAnimatedEntity;
+import com.codecool.snake.entities.Animatable;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
@@ -10,8 +10,8 @@ public class GameLoop extends AnimationTimer {
     @Override
     public void handle(long now) {
         for (GameEntity gameObject : Globals.gameObjects) {
-            if (gameObject instanceof IAnimatedEntity) {
-                IAnimatedEntity animObject = (IAnimatedEntity)gameObject;
+            if (gameObject instanceof Animatable) {
+                Animatable animObject = (Animatable)gameObject;
                 animObject.step();
             }
         }

@@ -2,18 +2,16 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.IAnimatedEntity;
+import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
-import com.codecool.snake.entities.enemies.IEnemy;
-import com.codecool.snake.entities.powerups.IPowerup;
+import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class SnakeHead extends GameEntity implements IAnimatedEntity {
+public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 4;
+    private static final float speed = 2;
     private static final float turnRate = 2;
-    private float direction; // heading in degrees
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
 
@@ -25,43 +23,37 @@ public class SnakeHead extends GameEntity implements IAnimatedEntity {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
-        direction = 0; // goes up
 
         addPart(4);
     }
 
     public void step() {
+        double dir = getRotate();
         if (Globals.leftKeyDown) {
-            direction = direction + turnRate;
+            dir = dir - turnRate;
         }
         if (Globals.rightKeyDown) {
-            direction = direction - turnRate;
+            dir = dir + turnRate;
         }
         // set rotation and position
-        setRotate(-direction);
-        Point2D heading = Utils.directionToVector(direction, speed);
-        setX(getX() - heading.getX());
-        setY(getY() - heading.getY());
+        setRotate(dir);
+        Point2D heading = Utils.directionToVector(dir, speed);
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
 
         // check if collided with an enemy or a powerup
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof IPowerup) {
-                    IPowerup powerup = (IPowerup) entity;
-                    powerup.apply(this);
-                    System.out.println("got berry :)");
-                }
-                if (entity instanceof IEnemy) {
-                    IEnemy enemy = (IEnemy) entity;
-                    health = health - enemy.getDamage();
-                    entity.destroy();
-                    System.out.println("player health: " + health);
+                if (entity instanceof Interactable) {
+                    Interactable interactable = (Interactable) entity;
+                    interactable.apply(this);
+                    System.out.println(interactable.getMessage());
                 }
             }
         }
 
         // check for game over condition
-        if (IsOutOfBounds() || health <= 0) {
+        if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
         }
@@ -74,4 +66,7 @@ public class SnakeHead extends GameEntity implements IAnimatedEntity {
         }
     }
 
+    public void changeHealth(int diff) {
+        health += diff;
+    }
 }

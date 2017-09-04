@@ -18,9 +18,6 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
         primaryStage.show();
         game.start();
-
-
     }
-
 
 }
