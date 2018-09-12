@@ -10,57 +10,25 @@ import javafx.event.EventHandler;
 import javafx.util.Duration;
 
 public class GameLoop {
-    Timeline looper = new Timeline();
+    private boolean running = false;
 
-    GameLoop() {
-        looper.setCycleCount( Timeline.INDEFINITE );
-        final long timeStart = System.currentTimeMillis();
-
-        KeyFrame kf = new KeyFrame(
-            Duration.seconds(0.017),                // 60 FPS
-                ae -> {
-                    double t = (System.currentTimeMillis() - timeStart) / 1000.0;
-                    step(t);
-                });
-
-        looper.getKeyFrames().add( kf );
-    }
     public void start() {
-        looper.play();
+        running = true;
     }
 
     public void stop() {
-        looper.stop();
+        running = false;
     }
 
-    private void step(double timePassed) {
-        Game.snake.step();
-        for (GameEntity gameObject : Globals.gameObjects.getGameObjects()) {
-            if (gameObject instanceof Animatable) {
-                Animatable animObject = (Animatable)gameObject;
-                animObject.step();
+    public void step(double timePassed) {
+        if(running) {
+            Game.snake.step();
+            for (GameEntity gameObject : Globals.gameObjects.getGameObjects()) {
+                if (gameObject instanceof Animatable) {
+                    ((Animatable) gameObject).step();
+                }
             }
         }
         Globals.gameObjects.frameFinished();
     }
 }
-/*
-public class GameLoop extends AnimationTimer {
-
-    // This gets called every 1/60 seconds
-    @Override
-    public void handle(long now) {
-        for (GameEntity gameObject : Globals.gameObjects) {
-            if (gameObject instanceof Animatable) {
-                Animatable animObject = (Animatable)gameObject;
-                animObject.step();
-            }
-        }
-        Globals.gameObjects.addAll(Globals.newGameObjects);
-        Globals.newGameObjects.clear();
-
-        Globals.gameObjects.removeAll(Globals.oldGameObjects);
-        Globals.oldGameObjects.clear();
-    }
-}
-*/

@@ -21,7 +21,6 @@ public class Globals {
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
     public static GameObjectList gameObjects;
-    public static GameLoop gameLoop;
 
     static {
         gameObjects = new GameObjectList();
