@@ -5,68 +5,42 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-public class SnakeHead extends GameEntity implements Animatable {
+import java.util.LinkedList;
+import java.util.List;
 
-    private static final float speed = 2;
+public class SnakeHead extends GameEntity {
     private static final float turnRate = 2;
-    private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private int health;
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead(Pane pane, Vec2d position) {
         super(pane);
-        setX(xc);
-        setY(yc);
-        health = 100;
-        tail = this;
-        setImage(Globals.snakeHead);
-        pane.getChildren().add(this);
-
-        addPart(4);
+        setImage(Globals.resources.getImage("SnakeHead"));
+        setPosition(position);
     }
 
-    public void step() {
-        double dir = getRotate();
-        if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
+    public void updateRotation(SnakeControl turnDirection, float speed) {
+        double headRotation = getRotate();
+
+        if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
+            headRotation = headRotation - turnRate;
         }
-        if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
+        if (turnDirection.equals(SnakeControl.TURN_RIGHT)) {
+            headRotation = headRotation + turnRate;
         }
+
         // set rotation and position
-        setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
+        setRotate(headRotation);
+        Point2D heading = Utils.directionToVector(headRotation, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
-
-        // check if collided with an enemy or a powerup
-        for (GameEntity entity : Globals.getGameObjects()) {
-            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof Interactable) {
-                    Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
-                    System.out.println(interactable.getMessage());
-                }
-            }
-        }
-
-        // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
-        }
     }
 
-    public void addPart(int numParts) {
-        for (int i = 0; i < numParts; i++) {
-            SnakeBody newPart = new SnakeBody(pane, tail);
-            tail = newPart;
-        }
-    }
-
-    public void changeHealth(int diff) {
-        health += diff;
+    public void setDrawOrder() {
+        // make head draw last so the snake parts are not drawn over it
+        pane.getChildren().remove(this);
+        pane.getChildren().add(this);
     }
 }

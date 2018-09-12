@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
@@ -20,8 +21,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     public SimpleEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.simpleEnemy);
-        pane.getChildren().add(this);
+        setImage(Globals.resources.getImage("SimpleEnemy"));
         int speed = 1;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
@@ -42,8 +42,8 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     }
 
     @Override
-    public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+    public void apply(Snake snake) {
+        snake.changeHealth(-damage);
         destroy();
     }
 

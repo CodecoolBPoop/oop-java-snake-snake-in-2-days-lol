@@ -11,35 +11,23 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class SnakeBody extends GameEntity implements Animatable {
-
-    private GameEntity parent;
+public class SnakeBody extends GameEntity {
     private Queue<Vec2d> history = new LinkedList<>();
     private static final int historySize = 10;
 
-    public SnakeBody(Pane pane, GameEntity parent) {
+    public SnakeBody(Pane pane, Vec2d coord) {
         super(pane);
-        this.parent = parent;
-        setImage(Globals.snakeBody);
+        setImage(Globals.resources.getImage("SnakeBody"));
+        setPosition(coord);
 
-        // place it visually below the current tail
-        List<Node> children = pane.getChildren();
-        children.add(children.indexOf(parent), this);
-
-        double xc = parent.getX();
-        double yc = parent.getY();
-        setX(xc);
-        setY(yc);
         for (int i = 0; i < historySize; i++) {
-            history.add(new Vec2d(xc, yc));
+            history.add(coord);
         }
     }
 
-    public void step() {
-        Vec2d pos = history.poll(); // remove the oldest item from the history
-        setX(pos.x);
-        setY(pos.y);
-        history.add(new Vec2d(parent.getX(), parent.getY())); // add the parent's current position to the beginning of the history
+    public void addNewPos(Vec2d latestPos) {
+        Vec2d currentPos = history.poll(); // remove the oldest item from the history
+        setPosition(currentPos);
+        history.add(latestPos); // add the parent's current position to the beginning of the history
     }
-
 }

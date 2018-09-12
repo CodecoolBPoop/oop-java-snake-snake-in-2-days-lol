@@ -3,6 +3,7 @@ package com.codecool.snake.entities.powerups;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
@@ -13,8 +14,7 @@ public class SimplePowerup extends GameEntity implements Interactable {
 
     public SimplePowerup(Pane pane) {
         super(pane);
-        setImage(Globals.powerupBerry);
-        pane.getChildren().add(this);
+        setImage(Globals.resources.getImage("PowerUpBerry"));
 
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
@@ -22,8 +22,8 @@ public class SimplePowerup extends GameEntity implements Interactable {
     }
 
     @Override
-    public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(4);
+    public void apply(Snake snake) {
+        snake.addPart(4);
         destroy();
     }
 

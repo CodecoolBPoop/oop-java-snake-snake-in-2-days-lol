@@ -1,6 +1,7 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import com.sun.javafx.geom.Vec2d;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -11,18 +12,28 @@ public abstract class GameEntity extends ImageView {
 
     protected GameEntity(Pane pane) {
         this.pane = pane;
+        pane.getChildren().add(this);
         // add to the main loop.
-        Globals.addGameObject(this);
+        Globals.gameObjects.addGameObject(this);
     }
 
     public void destroy() {
         if (getParent() != null) {
             pane.getChildren().remove(this);
         }
-        Globals.removeGameObject(this);
+        Globals.gameObjects.removeGameObject(this);
     }
 
-    protected boolean isOutOfBounds() {
+    public Vec2d getPosition() {
+        return new Vec2d(getX(), getY());
+    }
+
+    public void setPosition(Vec2d pos) {
+        setX(pos.x);
+        setY(pos.y);
+    }
+
+    public boolean isOutOfBounds() {
         if (getX() > Globals.WINDOW_WIDTH || getX() < 0 ||
             getY() > Globals.WINDOW_HEIGHT || getY() < 0) {
             return true;
