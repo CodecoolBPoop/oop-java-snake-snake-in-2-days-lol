@@ -16,10 +16,6 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 700;
 
     public static Resources resources = new Resources();
-    //.. put here the other images you want to use
-
-    public static boolean leftKeyDown;
-    public static boolean rightKeyDown;
     public static GameObjectList gameObjects;
 
     static {

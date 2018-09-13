@@ -6,9 +6,11 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
@@ -33,8 +35,8 @@ public class Snake implements Animatable {
 
     public void step() {
         SnakeControl turnDir = SnakeControl.INVALID;
-        if(Globals.leftKeyDown) turnDir = SnakeControl.TURN_LEFT;
-        if(Globals.rightKeyDown) turnDir = SnakeControl.TURN_RIGHT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
 
         head.updateRotation(turnDir, speed);
         updateSnakeBodyHistory();
