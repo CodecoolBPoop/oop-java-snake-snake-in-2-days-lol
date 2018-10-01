@@ -20,7 +20,7 @@ public class GameLoop {
         running = false;
     }
 
-    public void step(double timePassed) {
+    public void step() {
         if(running) {
             Game.snake.step();
             for (GameEntity gameObject : Globals.gameObjects.getGameObjects()) {
