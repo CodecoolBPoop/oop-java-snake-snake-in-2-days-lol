@@ -18,8 +18,9 @@ public class Game extends Pane {
 
 
     public Game() {
-        setupResources();
+        Globals.gameObjects = new GameObjectList(this);
         gameTimer.setup(gameLoop::step);
+        setupResources();
         spawnSnake();
         spawnEnemies(4);
         spawnPowerUps(4);
@@ -41,14 +42,14 @@ public class Game extends Pane {
     }
 
     private void spawnSnake() {
-        snake = new Snake(this, new Vec2d(500, 500));
+        snake = new Snake(new Vec2d(500, 500));
     }
     private void spawnEnemies(int numberOfEnemies) {
-        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy(this);
+        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {
-        for(int i = 0; i < numberOfPowerUps; ++i) new SimplePowerup(this);
+        for(int i = 0; i < numberOfPowerUps; ++i) new SimplePowerup();
     }
 
     private void setupInputHandling() {

@@ -2,16 +2,13 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.Game;
 import com.codecool.snake.Globals;
-import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,13 +18,12 @@ public class Snake implements Animatable {
     private int health;
 
     private SnakeHead head;
-    private List<SnakeBody> body = new LinkedList<>();
-    private List<SnakeBody> newBody = new LinkedList<>();
-    private Pane pane;
+    private List<GameEntity> body = new LinkedList<>();
+    private List<GameEntity> newBody = new LinkedList<>();
 
-    public Snake(Pane pane, Vec2d position) {
-        this.pane = pane;
-        head = new SnakeHead(pane, position);
+
+    public Snake(Vec2d position) {
+        head = new SnakeHead(position);
         health = 100;
 
         addPart(4);
@@ -44,11 +40,9 @@ public class Snake implements Animatable {
         checkInteractableCollision();
         checkForGameOverConditions();
 
-
         if(!newBody.isEmpty()) {
             body.addAll(newBody);
             newBody.clear();
-            head.setDrawOrder();
         }
     }
 
@@ -58,7 +52,7 @@ public class Snake implements Animatable {
         Vec2d position = parent.getPosition();
 
         for (int i = 0; i < numParts; i++) {
-            SnakeBody newBodyPart = new SnakeBody(pane, position);
+            SnakeBody newBodyPart = new SnakeBody(position);
             newBody.add(newBodyPart);
         }
     }
@@ -91,8 +85,8 @@ public class Snake implements Animatable {
 
     private void updateSnakeBodyHistory() {
         GameEntity prev = head;
-        for(SnakeBody currentPart : body) {
-            currentPart.addNewPos(prev.getPosition());
+        for(GameEntity currentPart : body) {
+            currentPart.setPosition(prev.getPosition());
             prev = currentPart;
         }
     }

@@ -3,24 +3,15 @@ package com.codecool.snake.entities;
 import com.codecool.snake.Globals;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {
 
-    protected Pane pane;
-
-    protected GameEntity(Pane pane) {
-        this.pane = pane;
-        pane.getChildren().add(this);
-        // add to the main loop.
+    protected GameEntity() {
         Globals.gameObjects.addGameObject(this);
     }
 
     public void destroy() {
-        if (getParent() != null) {
-            pane.getChildren().remove(this);
-        }
         Globals.gameObjects.removeGameObject(this);
     }
 

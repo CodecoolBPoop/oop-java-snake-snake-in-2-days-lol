@@ -15,8 +15,7 @@ import java.util.List;
 public class SnakeHead extends GameEntity {
     private static final float turnRate = 2;
 
-    public SnakeHead(Pane pane, Vec2d position) {
-        super(pane);
+    public SnakeHead(Vec2d position) {
         setImage(Globals.resources.getImage("SnakeHead"));
         setPosition(position);
     }
@@ -36,11 +35,5 @@ public class SnakeHead extends GameEntity {
         Point2D heading = Utils.directionToVector(headRotation, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
-    }
-
-    public void setDrawOrder() {
-        // make head draw last so the snake parts are not drawn over it
-        pane.getChildren().remove(this);
-        pane.getChildren().add(this);
     }
 }

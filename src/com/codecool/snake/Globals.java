@@ -19,6 +19,5 @@ public class Globals {
     public static GameObjectList gameObjects;
 
     static {
-        gameObjects = new GameObjectList();
     }
 }
