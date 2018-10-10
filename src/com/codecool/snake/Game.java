@@ -20,7 +20,6 @@ public class Game extends Pane {
 
     public Game() {
         Globals.display = new Display(this);
-        Globals.gameObjects = new DelayedModificationList();
         gameTimer.setup(gameLoop::step);
         setupResources();
         spawnSnake();

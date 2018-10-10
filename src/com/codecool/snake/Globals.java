@@ -11,5 +11,4 @@ public class Globals {
 
     public static Display display;
     public static Resources resources = new Resources();
-    public static DelayedModificationList<GameEntity> gameObjects;
 }

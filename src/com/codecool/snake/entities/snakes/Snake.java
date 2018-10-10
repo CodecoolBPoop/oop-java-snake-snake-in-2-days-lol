@@ -66,7 +66,7 @@ public class Snake implements Animatable {
     private void checkInteractableCollision() {
         // check if collided with an enemy or a powerup
         for(GameEntity bodyPart : body.getList()) {
-            for (GameEntity entity : Globals.gameObjects.getList()) {
+            for (GameEntity entity : Globals.display.getObjectList()) {
                 if (bodyPart.getBoundsInParent().intersects(entity.getBoundsInParent())) {
                     if (entity instanceof Interactable) {
                         Interactable interactable = (Interactable) entity;

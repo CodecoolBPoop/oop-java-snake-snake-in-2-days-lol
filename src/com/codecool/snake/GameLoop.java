@@ -17,12 +17,12 @@ public class GameLoop {
     public void step() {
         if(running) {
             Game.snake.step();
-            for (GameEntity gameObject : Globals.gameObjects.getList()) {
+            for (GameEntity gameObject : Globals.display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
                 }
             }
         }
-        Globals.gameObjects.doPendingModifications();
+        Globals.display.frameFinished();
     }
 }
