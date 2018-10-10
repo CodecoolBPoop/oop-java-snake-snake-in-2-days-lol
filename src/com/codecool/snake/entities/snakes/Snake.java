@@ -6,6 +6,8 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.enemies.Enemy;
+import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.input.KeyCode;
@@ -20,7 +22,7 @@ public class Snake implements Animatable {
 
 
     public Snake(Vec2d position) {
-        head = new SnakeHead(position);
+        head = new SnakeHead(this, position);
         health = 100;
         body = new DelayedModificationList<GameEntity>();
 
@@ -35,7 +37,6 @@ public class Snake implements Animatable {
         head.updateRotation(turnDir, speed);
         updateSnakeBodyHistory();
 
-        checkInteractableCollision();
         checkForGameOverConditions();
 
         body.doPendingModifications();
@@ -60,21 +61,6 @@ public class Snake implements Animatable {
         if (head.isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Game.gameLoop.stop();
-        }
-    }
-
-    private void checkInteractableCollision() {
-        // check if collided with an enemy or a powerup
-        for(GameEntity bodyPart : body.getList()) {
-            for (GameEntity entity : Globals.display.getObjectList()) {
-                if (bodyPart.getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                    if (entity instanceof Interactable) {
-                        Interactable interactable = (Interactable) entity;
-                        interactable.apply(this);
-                        System.out.println(interactable.getMessage());
-                    }
-                }
-            }
         }
     }
 

@@ -5,7 +5,6 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
@@ -21,9 +20,11 @@ public class SimplePowerup extends GameEntity implements Interactable {
     }
 
     @Override
-    public void apply(Snake snake) {
-        snake.addPart(4);
-        destroy();
+    public void apply(GameEntity entity) {
+        if(entity instanceof SnakeHead){
+            System.out.println(getMessage());
+            destroy();
+        }
     }
 
     @Override

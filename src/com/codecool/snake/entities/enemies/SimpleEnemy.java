@@ -13,12 +13,13 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 // a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
+public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 10;
 
     public SimpleEnemy() {
+        super(10);
+
         setImage(Globals.resources.getImage("SimpleEnemy"));
         int speed = 1;
         Random rnd = new Random();
@@ -40,9 +41,11 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     }
 
     @Override
-    public void apply(Snake snake) {
-        snake.changeHealth(-damage);
-        destroy();
+    public void apply(GameEntity entity) {
+        if(entity instanceof SnakeHead){
+            System.out.println(getMessage());
+            destroy();
+        }
     }
 
     @Override
