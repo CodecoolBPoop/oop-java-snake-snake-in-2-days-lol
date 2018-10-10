@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.Snake;
@@ -18,7 +19,8 @@ public class Game extends Pane {
 
 
     public Game() {
-        Globals.gameObjects = new GameObjectList(this);
+        Globals.display = new Display(this);
+        Globals.gameObjects = new DelayedModificationList();
         gameTimer.setup(gameLoop::step);
         setupResources();
         spawnSnake();
