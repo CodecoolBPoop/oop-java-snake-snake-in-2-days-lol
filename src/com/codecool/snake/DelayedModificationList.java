@@ -1,9 +1,5 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

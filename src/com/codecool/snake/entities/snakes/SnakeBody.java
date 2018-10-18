@@ -2,14 +2,11 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
-import com.sun.javafx.geom.Vec2d;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
-
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
+
+import com.sun.javafx.geom.Vec2d;
+
 
 public class SnakeBody extends GameEntity {
     private Queue<Vec2d> history = new LinkedList<>();

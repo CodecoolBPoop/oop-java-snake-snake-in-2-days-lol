@@ -1,10 +1,9 @@
 package com.codecool.snake.eventhandler;
 
-import com.codecool.snake.Globals;
-import javafx.scene.Scene;
+import java.util.HashMap;
+
 import javafx.scene.input.KeyCode;
 
-import java.util.HashMap;
 
 public class InputHandler {
     private static InputHandler instance = null;

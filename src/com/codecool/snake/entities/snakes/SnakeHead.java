@@ -6,8 +6,10 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
+
 import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
+
 
 public class SnakeHead extends GameEntity implements Interactable {
     private static final float turnRate = 2;

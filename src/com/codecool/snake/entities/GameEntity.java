@@ -1,6 +1,7 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.image.ImageView;
 

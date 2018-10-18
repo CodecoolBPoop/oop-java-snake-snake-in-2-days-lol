@@ -1,8 +1,9 @@
 package com.codecool.snake.resources;
 
+import java.util.HashMap;
+
 import javafx.scene.image.Image;
 
-import java.util.HashMap;
 
 public class Resources {
     private HashMap<String, Image> images = new HashMap<String, Image>();
