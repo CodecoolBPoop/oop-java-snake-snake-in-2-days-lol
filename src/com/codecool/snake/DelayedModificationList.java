@@ -9,13 +9,13 @@ import java.util.List;
  * is done, it won't happen until the doPendingModifications() method is called
  */
 public class DelayedModificationList<T> {
-    private List<T> gameObjects = new LinkedList<>();
-    private List<T> newGameObjects = new LinkedList<>();// Holds game objects crated in this frame.
-    private List<T> oldGameObjects = new LinkedList<>();// Holds game objects that will be destroyed this frame.
+    private List<T> objects = new LinkedList<>();
+    private List<T> newObjects = new LinkedList<>();// Holds game objects crated in this frame.
+    private List<T> oldObjects = new LinkedList<>();// Holds game objects that will be destroyed this frame.
 
 
     public void add(T obj) {
-        newGameObjects.add(obj);
+        newObjects.add(obj);
     }
 
     public void addAll(List<T> objs) {
@@ -25,15 +25,15 @@ public class DelayedModificationList<T> {
     }
 
     public void remove(T obj) {
-        oldGameObjects.add(obj);
+        oldObjects.add(obj);
     }
 
     public List<T> getList() {
-        return Collections.unmodifiableList(gameObjects);
+        return Collections.unmodifiableList(objects);
     }
 
     public boolean isEmpty() {
-        if(!newGameObjects.isEmpty() || !gameObjects.isEmpty()) {
+        if(!newObjects.isEmpty() || !objects.isEmpty()) {
             return false;
         }
         return true;
@@ -43,16 +43,16 @@ public class DelayedModificationList<T> {
      * All the modifications (Add, Remove) is pending until you call this method
      */
     public void doPendingModifications() {
-        gameObjects.addAll(newGameObjects);
-        newGameObjects.clear();
+        objects.addAll(newObjects);
+        newObjects.clear();
 
-        gameObjects.removeAll(oldGameObjects);
-        oldGameObjects.clear();
+        objects.removeAll(oldObjects);
+        oldObjects.clear();
     }
 
     public T getLast() {
-        if(!newGameObjects.isEmpty()) return newGameObjects.get(newGameObjects.size()-1);
-        if(!gameObjects.isEmpty()) return gameObjects.get(gameObjects.size()-1);
+        if(!newObjects.isEmpty()) return newObjects.get(newObjects.size()-1);
+        if(!objects.isEmpty()) return objects.get(objects.size()-1);
         return null;
     }
 }

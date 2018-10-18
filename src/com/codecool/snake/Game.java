@@ -12,23 +12,22 @@ import javafx.scene.layout.Pane;
 
 
 public class Game extends Pane {
-
-    public static Snake snake = null;
-    public static GameLoop gameLoop = new GameLoop();
-    GameTimer gameTimer = new GameTimer();
+    public static GameLoop gameLoop;
+    private Snake snake = null;
+    private GameTimer gameTimer = new GameTimer();
 
 
     public Game() {
         Globals.display = new Display(this);
-        gameTimer.setup(gameLoop::step);
         setupResources();
         spawnSnake();
         spawnEnemies(4);
         spawnPowerUps(4);
 
+        gameLoop = new GameLoop(snake);
+        gameTimer.setup(gameLoop::step);
         gameTimer.play();
     }
-
 
     private void setupResources() {
         Globals.resources.addImage("SnakeHead", new Image("snake_head.png"));

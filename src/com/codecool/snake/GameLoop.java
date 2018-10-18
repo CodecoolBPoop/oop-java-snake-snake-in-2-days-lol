@@ -3,11 +3,15 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.snakes.Snake;
 
 import java.util.List;
 
 public class GameLoop {
+    private Snake snake;
     private boolean running = false;
+
+    public GameLoop(Snake snake) { this.snake = snake; }
 
     public void start() {
         running = true;
@@ -19,15 +23,15 @@ public class GameLoop {
 
     public void step() {
         if(running) {
-            Game.snake.step();
+            snake.step();
             for (GameEntity gameObject : Globals.display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
                 }
             }
+            checkCollisions();
         }
 
-        checkCollisions();
         Globals.display.frameFinished();
     }
 
