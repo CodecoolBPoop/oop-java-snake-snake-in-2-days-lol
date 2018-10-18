@@ -8,13 +8,13 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 
 import java.util.Random;
 
-// a simple powerup that makes the snake grow TODO make other powerups
-public class SimplePowerup extends GameEntity implements Interactable {
 
-    public SimplePowerup() {
+public class SimplePowerUp extends GameEntity implements Interactable {
+    private static Random rnd = new Random();
+
+    public SimplePowerUp() {
         setImage(Globals.resources.getImage("PowerUpBerry"));
 
-        Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
     }

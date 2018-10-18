@@ -1,8 +1,7 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.SimplePowerUp;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
@@ -50,7 +49,7 @@ public class Game extends Pane {
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {
-        for(int i = 0; i < numberOfPowerUps; ++i) new SimplePowerup();
+        for(int i = 0; i < numberOfPowerUps; ++i) new SimplePowerUp();
     }
 
     private void setupInputHandling() {

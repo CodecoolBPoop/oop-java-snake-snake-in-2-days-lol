@@ -12,22 +12,23 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-// a simple enemy TODO make better ones.
+
 public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
     private Point2D heading;
+    private static Random rnd = new Random();
 
     public SimpleEnemy() {
         super(10);
 
         setImage(Globals.resources.getImage("SimpleEnemy"));
-        int speed = 1;
-        Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
+
+        int speed = 1;
         heading = Utils.directionToVector(direction, speed);
     }
 
@@ -50,6 +51,6 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return (getDamage() + " damage");
     }
 }

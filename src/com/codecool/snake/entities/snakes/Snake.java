@@ -5,9 +5,6 @@ import com.codecool.snake.Game;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.enemies.Enemy;
-import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.input.KeyCode;
@@ -15,7 +12,7 @@ import javafx.scene.input.KeyCode;
 
 public class Snake implements Animatable {
     private static final float speed = 2;
-    private int health;
+    private int health = 100;
 
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
@@ -23,18 +20,15 @@ public class Snake implements Animatable {
 
     public Snake(Vec2d position) {
         head = new SnakeHead(this, position);
-        health = 100;
-        body = new DelayedModificationList<GameEntity>();
+        body = new DelayedModificationList<>();
 
         addPart(4);
     }
 
     public void step() {
-        SnakeControl turnDir = SnakeControl.INVALID;
-        if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
-        if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
-
+        SnakeControl turnDir = getUserInput();
         head.updateRotation(turnDir, speed);
+
         updateSnakeBodyHistory();
 
         checkForGameOverConditions();
@@ -42,8 +36,14 @@ public class Snake implements Animatable {
         body.doPendingModifications();
     }
 
+    private SnakeControl getUserInput() {
+        SnakeControl turnDir = SnakeControl.INVALID;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
+        return turnDir;
+    }
+
     public void addPart(int numParts) {
-        // place it visually below the current tail
         GameEntity parent = getLastPart();
         Vec2d position = parent.getPosition();
 
@@ -51,6 +51,7 @@ public class Snake implements Animatable {
             SnakeBody newBodyPart = new SnakeBody(position);
             body.add(newBodyPart);
         }
+        Globals.display.updateSnakeHeadDrawPosition(head);
     }
 
     public void changeHealth(int diff) {

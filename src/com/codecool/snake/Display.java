@@ -30,4 +30,9 @@ public class Display {
     public void frameFinished() {
         gameObjects.doPendingModifications();
     }
+
+    public void updateSnakeHeadDrawPosition(GameEntity snakeHead) {
+        displayPane.getChildren().remove(snakeHead);
+        displayPane.getChildren().add(snakeHead);
+    }
 }
