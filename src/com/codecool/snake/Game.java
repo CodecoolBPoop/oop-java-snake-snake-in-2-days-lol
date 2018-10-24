@@ -30,14 +30,15 @@ public class Game extends Pane {
         spawnEnemies(4);
         spawnPowerUps(4);
 
-        Globals.getInstance().gameLoop = new GameLoop(snake);
-        gameTimer.setup(Globals.getInstance().gameLoop::step);
+        GameLoop gameLoop = new GameLoop(snake);
+        Globals.getInstance().setGameLoop(gameLoop);
+        gameTimer.setup(gameLoop::step);
         gameTimer.play();
     }
 
     public void start() {
         setupInputHandling();
-        Globals.getInstance().gameLoop.start();
+        Globals.getInstance().startGame();
     }
 
     private void spawnSnake() {
