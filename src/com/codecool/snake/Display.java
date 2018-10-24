@@ -36,4 +36,9 @@ public class Display {
         displayPane.getChildren().remove(snakeHead);
         displayPane.getChildren().add(snakeHead);
     }
+
+    public void clear() {
+        displayPane.getChildren().clear();
+        gameObjects.clear();
+    }
 }

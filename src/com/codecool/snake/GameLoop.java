@@ -24,7 +24,7 @@ public class GameLoop {
     public void step() {
         if(running) {
             snake.step();
-            for (GameEntity gameObject : Globals.display.getObjectList()) {
+            for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
                 }
@@ -32,11 +32,11 @@ public class GameLoop {
             checkCollisions();
         }
 
-        Globals.display.frameFinished();
+        Globals.getInstance().display.frameFinished();
     }
 
     private void checkCollisions() {
-        List<GameEntity> gameObjs = Globals.display.getObjectList();
+        List<GameEntity> gameObjs = Globals.getInstance().display.getObjectList();
         for (int idxToCheck = 0; idxToCheck < gameObjs.size(); ++idxToCheck) {
             GameEntity objToCheck = gameObjs.get(idxToCheck);
             if (objToCheck instanceof Interactable) {

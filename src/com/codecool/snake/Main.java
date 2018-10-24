@@ -22,4 +22,8 @@ public class Main extends Application {
         game.start();
     }
 
+    @Override
+    public void stop() throws Exception {
+        System.out.println("Exiting..");
+    }
 }

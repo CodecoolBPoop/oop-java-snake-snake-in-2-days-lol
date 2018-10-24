@@ -1,13 +1,38 @@
 package com.codecool.snake;
 
 import com.codecool.snake.resources.Resources;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 // class for holding all static stuff
 public class Globals {
+    private static Globals instance = null;
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Display display;
-    public static Resources resources = new Resources();
+    public Display display;
+    public GameLoop gameLoop;
+    public Game game;
+    private Resources resources;
+
+
+    public static Globals getInstance() {
+        if(instance == null) instance = new Globals();
+        return instance;
+    }
+
+    public void setupResources() {
+        resources = new Resources();
+        resources.addImage("SnakeHead", new Image("snake_head.png"));
+        resources.addImage("SnakeBody", new Image("snake_body.png"));
+        resources.addImage("SimpleEnemy", new Image("simple_enemy.png"));
+        resources.addImage("PowerUpBerry", new Image("powerup_berry.png"));
+    }
+
+    public Image getImage(String name) { return resources.getImage(name); }
+
+    private Globals() {
+        // singleton needs the class to have private constructor
+    }
 }

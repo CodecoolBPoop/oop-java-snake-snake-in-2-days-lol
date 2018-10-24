@@ -20,7 +20,7 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     public SimpleEnemy() {
         super(10);
 
-        setImage(Globals.resources.getImage("SimpleEnemy"));
+        setImage(Globals.getInstance().getImage("SimpleEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 

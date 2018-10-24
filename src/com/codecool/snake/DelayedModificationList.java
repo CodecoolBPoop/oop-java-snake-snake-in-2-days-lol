@@ -55,4 +55,10 @@ public class DelayedModificationList<T> {
         if(!objects.isEmpty()) return objects.get(objects.size()-1);
         return null;
     }
+
+    public void clear() {
+        objects.clear();
+        newObjects.clear();
+        oldObjects.clear();
+    }
 }

@@ -5,6 +5,7 @@ import com.codecool.snake.entities.powerups.SimplePowerUp;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
 
+import com.codecool.snake.resources.Resources;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,33 +13,31 @@ import javafx.scene.layout.Pane;
 
 
 public class Game extends Pane {
-    public static GameLoop gameLoop;
     private Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
 
 
     public Game() {
-        Globals.display = new Display(this);
-        setupResources();
+        Globals.getInstance().game = this;
+        Globals.getInstance().display = new Display(this);
+        Globals.getInstance().setupResources();
+
+        init();
+    }
+
+    public void init() {
         spawnSnake();
         spawnEnemies(4);
         spawnPowerUps(4);
 
-        gameLoop = new GameLoop(snake);
-        gameTimer.setup(gameLoop::step);
+        Globals.getInstance().gameLoop = new GameLoop(snake);
+        gameTimer.setup(Globals.getInstance().gameLoop::step);
         gameTimer.play();
-    }
-
-    private void setupResources() {
-        Globals.resources.addImage("SnakeHead", new Image("snake_head.png"));
-        Globals.resources.addImage("SnakeBody", new Image("snake_body.png"));
-        Globals.resources.addImage("SimpleEnemy", new Image("simple_enemy.png"));
-        Globals.resources.addImage("PowerUpBerry", new Image("powerup_berry.png"));
     }
 
     public void start() {
         setupInputHandling();
-        gameLoop.start();
+        Globals.getInstance().gameLoop.start();
     }
 
     private void spawnSnake() {

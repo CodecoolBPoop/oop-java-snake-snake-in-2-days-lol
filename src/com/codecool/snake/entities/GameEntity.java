@@ -9,11 +9,11 @@ import javafx.scene.image.ImageView;
 public abstract class GameEntity extends ImageView {
 
     protected GameEntity() {
-        Globals.display.add(this);
+        Globals.getInstance().display.add(this);
     }
 
     public void destroy() {
-        Globals.display.remove(this);
+        Globals.getInstance().display.remove(this);
     }
 
     public Vec2d getPosition() {

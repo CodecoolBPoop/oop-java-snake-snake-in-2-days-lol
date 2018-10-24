@@ -52,7 +52,7 @@ public class Snake implements Animatable {
             SnakeBody newBodyPart = new SnakeBody(position);
             body.add(newBodyPart);
         }
-        Globals.display.updateSnakeHeadDrawPosition(head);
+        Globals.getInstance().display.updateSnakeHeadDrawPosition(head);
     }
 
     public void changeHealth(int diff) {
@@ -62,7 +62,7 @@ public class Snake implements Animatable {
     private void checkForGameOverConditions() {
         if (head.isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
-            Game.gameLoop.stop();
+            Globals.getInstance().gameLoop.stop();
         }
     }
 
