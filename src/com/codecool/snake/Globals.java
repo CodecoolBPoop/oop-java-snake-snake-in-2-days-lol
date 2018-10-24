@@ -12,8 +12,9 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 700;
 
     public Display display;
-    private GameLoop gameLoop;
     public Game game;
+
+    private GameLoop gameLoop;
     private Resources resources;
 
 
@@ -36,12 +37,11 @@ public class Globals {
 
     public Image getImage(String name) { return resources.getImage(name); }
 
-    private Globals() {
-        // singleton needs the class to have private constructor
-    }
-
     public void startGame() { gameLoop.start(); }
 
     public void stopGame() { gameLoop.stop(); }
 
+    private Globals() {
+        // singleton needs the class to have private constructor
+    }
 }
