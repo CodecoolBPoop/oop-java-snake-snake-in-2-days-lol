@@ -35,6 +35,7 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     public void step() {
         if (isOutOfBounds()) {
             destroy();
+            new SimpleEnemy();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
