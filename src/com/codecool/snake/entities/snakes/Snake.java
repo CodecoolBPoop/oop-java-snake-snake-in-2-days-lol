@@ -9,10 +9,15 @@ import com.codecool.snake.eventhandler.InputHandler;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.input.KeyCode;
 
+import java.security.Key;
+
 
 public class Snake implements Animatable {
     private static final float speed = 2;
     private int health = 100;
+    private KeyCode leftDir= KeyCode.LEFT;
+    private KeyCode rightDir= KeyCode.RIGHT;
+
 
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
@@ -23,6 +28,11 @@ public class Snake implements Animatable {
         body = new DelayedModificationList<>();
 
         addPart(4);
+    }
+
+    public void secondSnakeDiretionSetter (){
+        leftDir = KeyCode.A;
+        rightDir = KeyCode.D;
     }
 
     public void step() {
@@ -37,8 +47,8 @@ public class Snake implements Animatable {
 
     private SnakeControl getUserInput() {
         SnakeControl turnDir = SnakeControl.INVALID;
-        if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
-        if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
+        if(InputHandler.getInstance().isKeyPressed(leftDir)) turnDir = SnakeControl.TURN_LEFT;
+        if(InputHandler.getInstance().isKeyPressed(rightDir)) turnDir = SnakeControl.TURN_RIGHT;
         return turnDir;
     }
 
