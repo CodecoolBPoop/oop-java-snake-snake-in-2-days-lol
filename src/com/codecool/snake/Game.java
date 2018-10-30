@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.PoliceCapEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 import com.codecool.snake.entities.snakes.Snake;
@@ -11,6 +12,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
+import org.omg.PortableServer.POA;
 
 import java.util.Optional;
 
@@ -66,6 +68,7 @@ public class Game extends Pane {
 
     private void spawnEnemies(int numberOfEnemies) {
         for (int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
+        for (int i = 0; i < numberOfEnemies; ++i) new PoliceCapEnemy();
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {
