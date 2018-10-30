@@ -21,6 +21,7 @@ public class Snake implements Animatable {
     private int health = 100;
     private KeyCode leftDir= KeyCode.LEFT;
     private KeyCode rightDir= KeyCode.RIGHT;
+    private KeyCode shootKey = KeyCode.M;
 
 
     private SnakeHead head;
@@ -37,11 +38,14 @@ public class Snake implements Animatable {
     public void secondSnakeDiretionSetter (){
         leftDir = KeyCode.A;
         rightDir = KeyCode.D;
+        shootKey = KeyCode.G;
     }
 
     public void step() {
         SnakeControl turnDir = getUserInput();
-        head.updateRotation(turnDir, speed);
+        boolean shoot = Shoot();
+
+        head.updateRotation(turnDir, speed, shoot);
 
         updateSnakeBodyHistory();
         checkForGameOverConditions();
@@ -54,6 +58,12 @@ public class Snake implements Animatable {
         if(InputHandler.getInstance().isKeyPressed(leftDir)) turnDir = SnakeControl.TURN_LEFT;
         if(InputHandler.getInstance().isKeyPressed(rightDir)) turnDir = SnakeControl.TURN_RIGHT;
         return turnDir;
+    }
+
+    private boolean Shoot(){
+        boolean shoot = false;
+        if(InputHandler.getInstance().isKeyPressed(shootKey)) shoot=true; InputHandler.getInstance().setKeyReleased(shootKey);
+        return shoot;
     }
 
     public void addPart(int numParts) {

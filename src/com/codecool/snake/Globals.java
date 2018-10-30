@@ -36,6 +36,7 @@ public class Globals {
         resources.addImage("Bullet", new Image("bullet.png"));
         resources.addImage("Dollar", new Image("dollar.jpg"));
         resources.addImage("MoneyBag", new Image("money_bag.png"));
+
     }
 
     public Image getImage(String name) { return resources.getImage(name); }
