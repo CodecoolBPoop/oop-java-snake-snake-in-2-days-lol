@@ -36,6 +36,10 @@ public class Globals {
         resources.addImage("Bullet", new Image("bullet.png"));
         resources.addImage("PoliceCapEnemy", new Image("police_hat.png"));
         resources.addImage("NavEnemy", new Image("NAV_great.jpg"));
+
+        resources.addImage("RedHealth", new Image("health.png"));
+        resources.addImage("GreenHealth", new Image("remainingHealth.png"));
+
         resources.addImage("Dollar", new Image("dollar.jpg"));
         resources.addImage("MoneyBag", new Image("money_bag.png"));
     }
