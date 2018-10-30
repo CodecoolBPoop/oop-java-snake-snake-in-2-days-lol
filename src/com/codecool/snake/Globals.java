@@ -34,11 +34,14 @@ public class Globals {
         resources.addImage("SimpleEnemy", new Image("simple_enemy.png"));
         resources.addImage("DollarSign", new Image("dollar_new.png"));
         resources.addImage("Bullet", new Image("bullet.png"));
+        resources.addImage("PoliceCapEnemy", new Image("police_hat.png"));
+        resources.addImage("NavEnemy", new Image("NAV_great.jpg"));
+
         resources.addImage("RedHealth", new Image("health.png"));
         resources.addImage("GreenHealth", new Image("remainingHealth.png"));
+
         resources.addImage("Dollar", new Image("dollar.jpg"));
         resources.addImage("MoneyBag", new Image("money_bag.png"));
-
     }
 
     public Image getImage(String name) { return resources.getImage(name); }
