@@ -6,6 +6,8 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
+import com.codecool.snake.entities.enemies.NavEnemy;
+import com.codecool.snake.entities.enemies.PoliceCapEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
@@ -40,7 +42,11 @@ public class Bullet extends GameEntity implements Animatable, Interactable {
         if(entity instanceof Enemy){
             System.out.println("Enemy killed");
             entity.destroy();
-            new SimpleEnemy();
+            if(entity instanceof NavEnemy){
+                new NavEnemy();
+            } else if(entity instanceof PoliceCapEnemy){
+                new PoliceCapEnemy();
+            }
         }
     }
 

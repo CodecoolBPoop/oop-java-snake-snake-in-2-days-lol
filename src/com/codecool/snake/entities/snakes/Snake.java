@@ -98,8 +98,11 @@ public class Snake implements Animatable {
     }
 
     public void changeHealth(int diff) {
-
-        health += diff;
+        if(health + diff >= 100){
+            health = 100;
+        }else{
+            health += diff;
+        }
     }
 
     private void checkForGameOverConditions() {
