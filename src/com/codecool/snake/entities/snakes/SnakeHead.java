@@ -21,7 +21,7 @@ public class SnakeHead extends GameEntity implements Interactable {
         setPosition(position);
     }
 
-    public void updateRotation(SnakeControl turnDirection, float speed) {
+    public void updateRotation(SnakeControl turnDirection, float speed, boolean shoot) {
         double headRotation = getRotate();
 
         if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
@@ -33,7 +33,13 @@ public class SnakeHead extends GameEntity implements Interactable {
 
         // set rotation and position
         setRotate(headRotation);
+
         Point2D heading = Utils.directionToVector(headRotation, speed);
+        if (shoot){
+            Vec2d headPos = getPosition();
+            double way = getRotate();
+            new Bullet(headPos, way);
+        }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
