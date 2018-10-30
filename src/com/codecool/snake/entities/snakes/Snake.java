@@ -13,7 +13,7 @@ import java.security.Key;
 
 
 public class Snake implements Animatable {
-    private static final float speed = 2;
+    private static float speed = 2;
     private int health = 100;
     private KeyCode leftDir= KeyCode.LEFT;
     private KeyCode rightDir= KeyCode.RIGHT;
@@ -87,5 +87,13 @@ public class Snake implements Animatable {
 
         if(result != null) return result;
         return head;
+    }
+
+    public void changeSpeed(float plusSpeed) {
+        speed += plusSpeed;
+    }
+
+    public int getHealth() {
+        return health;
     }
 }
