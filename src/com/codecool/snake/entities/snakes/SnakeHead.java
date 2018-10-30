@@ -5,6 +5,8 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
+import com.codecool.snake.entities.enemies.NavEnemy;
+import com.codecool.snake.entities.enemies.PoliceCapEnemy;
 import com.codecool.snake.entities.powerups.DollarPowerUp;
 import com.codecool.snake.entities.powerups.MoneyBagPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
@@ -53,8 +55,13 @@ public class SnakeHead extends GameEntity implements Interactable {
     public void apply(GameEntity entity) {
         if(entity instanceof Enemy){
             System.out.println(getMessage());
-            snake.changeHealth(((Enemy) entity).getDamage());
-            snake.getGreenHealthBar().changeGreenHealth((double)((Enemy) entity).getDamage());
+            snake.changeHealth(-((Enemy) entity).getDamage());
+            snake.getGreenHealthBar().changeGreenHealth(-((Enemy) entity).getDamage());
+            if(entity instanceof NavEnemy){
+                new NavEnemy();
+            } else if(entity instanceof PoliceCapEnemy){
+                new PoliceCapEnemy();
+            }
         }
         if(entity instanceof SimplePowerUp){
             System.out.println(getMessage());
@@ -62,7 +69,8 @@ public class SnakeHead extends GameEntity implements Interactable {
         }
         if (entity instanceof DollarPowerUp) {
             System.out.println(getMessage());
-            snake.changeHealth(50);
+            snake.changeHealth(10);
+            snake.getGreenHealthBar().changeGreenHealth(10.0);
             System.out.println(snake.getHealth());
         }
         if (entity instanceof MoneyBagPowerUp) {
