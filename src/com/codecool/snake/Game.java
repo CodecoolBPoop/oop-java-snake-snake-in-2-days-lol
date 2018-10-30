@@ -15,6 +15,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 
 import java.util.Optional;
 
@@ -48,6 +50,8 @@ public class Game extends Pane {
         spawnEnemies(4);
         spawnPowerUps(4);
         spawnMoneyBagPowerUps(2);
+
+        setTableBackground(Globals.backgroundImage);
 
         GameLoop gameLoop = new GameLoop(snake, snake2);
         Globals.getInstance().setGameLoop(gameLoop);
@@ -120,5 +124,12 @@ public class Game extends Pane {
         for (int i = 0; i < numberOfPowerUps; ++i) {
             new MoneyBagPowerUp();
         }
+    }
+
+    public void setTableBackground(Image tableBackground) {
+        setBackground(new Background(new BackgroundImage(tableBackground,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+
     }
 }
