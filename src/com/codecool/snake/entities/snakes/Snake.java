@@ -1,13 +1,17 @@
 package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.DelayedModificationList;
+import com.codecool.snake.GameTimer;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.animation.KeyFrame;
 import javafx.scene.input.KeyCode;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 import java.security.Key;
 
@@ -95,5 +99,21 @@ public class Snake implements Animatable {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setSpeedBack() {
+        speed = 2;
+
+//        timer.setCycleCount( Timeline.INDEFINITE );
+//
+//        KeyFrame kf = new KeyFrame(
+//                Duration.seconds(5),
+//                ae -> loopMethod.run());
+//
+//        timer.getKeyFrames().add( kf );
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

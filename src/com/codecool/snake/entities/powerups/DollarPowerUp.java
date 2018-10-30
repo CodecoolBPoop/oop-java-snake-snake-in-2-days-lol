@@ -11,7 +11,7 @@ public class DollarPowerUp extends GameEntity implements Interactable {
     private static Random rnd = new Random();
 
     public DollarPowerUp() {
-        setImage(Globals.getInstance().getImage("DollarSign"));
+        setImage(Globals.getInstance().getImage("Dollar"));
 
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);

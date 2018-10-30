@@ -6,10 +6,14 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.DollarPowerUp;
+import com.codecool.snake.entities.powerups.MoneyBagPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 
 import com.sun.javafx.geom.Vec2d;
 import javafx.geometry.Point2D;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SnakeHead extends GameEntity implements Interactable {
@@ -53,6 +57,19 @@ public class SnakeHead extends GameEntity implements Interactable {
             System.out.println(getMessage());
             snake.changeHealth(50);
             System.out.println(snake.getHealth());
+        }
+        if (entity instanceof MoneyBagPowerUp) {
+            System.out.println(getMessage());
+            snake.changeSpeed(2);
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            snake.setSpeedBack();
+                        }
+                    },
+                    4000
+            );
         }
     }
 

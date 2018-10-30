@@ -32,8 +32,10 @@ public class Globals {
         resources.addImage("SnakeHead", new Image("snake_head.png"));
         resources.addImage("SnakeBody", new Image("snake_body.png"));
         resources.addImage("SimpleEnemy", new Image("simple_enemy.png"));
-        resources.addImage("PowerUpBerry", new Image("powerup_berry.png"));
-        resources.addImage("DollarSign", new Image("dollar.jpeg"));
+        resources.addImage("DollarSign", new Image("dollar_new.png"));
+        resources.addImage("Bullet", new Image("bullet.png"));
+        resources.addImage("Dollar", new Image("dollar.jpg"));
+        resources.addImage("MoneyBag", new Image("money_bag.png"));
     }
 
     public Image getImage(String name) { return resources.getImage(name); }
