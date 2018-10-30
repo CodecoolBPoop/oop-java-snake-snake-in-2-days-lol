@@ -16,7 +16,7 @@ public class NavEnemy extends Enemy implements Animatable, Interactable {
     private static Random rnd = new Random();
 
     public NavEnemy() {
-        super(10);
+        super(20);
 
         setImage(Globals.getInstance().getImage("NavEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
