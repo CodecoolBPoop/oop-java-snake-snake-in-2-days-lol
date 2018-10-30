@@ -17,9 +17,7 @@ public class Bullet extends GameEntity implements Animatable, Interactable {
 
     public Bullet(Vec2d headPos, double way){
         setImage(Globals.getInstance().getImage("Bullet"));
-
-        setX(headPos.x);
-        setY(headPos.y);
+        setPosition(headPos);
 
         double direction = way;
         setRotate(way);

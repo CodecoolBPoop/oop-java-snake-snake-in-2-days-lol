@@ -59,11 +59,11 @@ public class Game extends Pane {
     }
 
     private void spawnSnake() {
-        snake = new Snake(new Vec2d(500, 500));
+        snake = new Snake(new Vec2d(700, 500));
     }
 
     private void spawnSnake2() {
-        snake2 = new Snake(new Vec2d(400, 400));
+        snake2 = new Snake(new Vec2d(300, 400), true);
         snake2.secondSnakeDiretionSetter();
     }
 
