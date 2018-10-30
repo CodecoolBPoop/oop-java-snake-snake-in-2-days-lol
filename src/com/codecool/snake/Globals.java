@@ -35,7 +35,7 @@ public class Globals {
         resources.addImage("PowerUpBerry", new Image("powerup_berry.png"));
         resources.addImage("Bullet", new Image("bullet.png"));
         resources.addImage("PoliceCapEnemy", new Image("police_hat.png"));
-        //resources.addImage("NAV", new Image("NAV_great.png"));
+        resources.addImage("NavEnemy", new Image("NAV_great.jpg"));
         //resources.addImage("Background", new Image("Snake_new_island_background.jpg"));
     }
 
