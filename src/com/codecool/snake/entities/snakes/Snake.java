@@ -1,18 +1,25 @@
 package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.DelayedModificationList;
+
 import com.codecool.snake.Game;
+
+import com.codecool.snake.GameTimer;
+
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.animation.KeyFrame;
 import javafx.scene.input.KeyCode;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 
 public class Snake implements Animatable {
-    private static final float speed = 2;
+    private static float speed = 2;
     private int health = 100;
 
     private KeyCode leftDir= KeyCode.LEFT;
@@ -115,6 +122,22 @@ public class Snake implements Animatable {
 
         if(result != null) return result;
         return head;
+    }
+
+    public void changeSpeed(float plusSpeed) {
+        speed += plusSpeed;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setSpeedBack() {
+        speed = 2;
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 
 }
