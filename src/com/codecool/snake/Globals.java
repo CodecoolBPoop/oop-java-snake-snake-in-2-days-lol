@@ -10,6 +10,7 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static Image backgroundImage = new Image("tropic.jpg");
 
     public Display display;
     public Game game;
