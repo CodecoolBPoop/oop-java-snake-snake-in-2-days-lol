@@ -2,23 +2,13 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.DelayedModificationList;
 
-import com.codecool.snake.Game;
-
-import com.codecool.snake.GameTimer;
-
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
-import javafx.animation.KeyFrame;
 import javafx.scene.input.KeyCode;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
-
-import javax.sound.midi.SysexMessage;
 
 
 public class Snake implements Animatable {
@@ -29,23 +19,23 @@ public class Snake implements Animatable {
 
 
     private KeyCode shootKey = KeyCode.M;
-    private int snakeBodyLenght = 0;
-    private static int numberOfSnakes = 0;
+    private int snakeBodyLength = 0;
     private int snakeNumber;
+    private static int numberOfSnakes = 0;
     private boolean theSnakeIsAlive;
 
 
     public void setSpeed(float speed) {
         this.speed = speed;
     }
-  
+
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
     private HealthBar redHealth;
     private HealthBar healthBar;
 
 
-    public HealthBar getGreenHealthBar(){
+    public HealthBar getGreenHealthBar() {
         return healthBar;
     }
 
@@ -64,7 +54,7 @@ public class Snake implements Animatable {
         addPart(4);
     }
 
-    public Snake(Vec2d position, boolean second){
+    public Snake(Vec2d position, boolean second) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
         redHealth = new HealthBar(false, second);
@@ -74,7 +64,7 @@ public class Snake implements Animatable {
         addPart(4);
     }
 
-    public void secondSnakeDiretionSetter() {
+    public void secondSnakeDirectionSetter() {
         leftDir = KeyCode.A;
         rightDir = KeyCode.D;
         shootKey = KeyCode.G;
@@ -115,15 +105,15 @@ public class Snake implements Animatable {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newBodyPart = new SnakeBody(position);
             body.add(newBodyPart);
-            snakeBodyLenght++;
+            snakeBodyLength++;
         }
         Globals.getInstance().display.updateSnakeHeadDrawPosition(head);
     }
 
     public void changeHealth(int diff) {
-        if(health + diff >= 100){
+        if (health + diff >= 100) {
             health = 100;
-        }else{
+        } else {
             health += diff;
         }
     }
@@ -132,9 +122,9 @@ public class Snake implements Animatable {
         if (theSnakeIsAlive) {
             if (head.isOutOfBounds() || health <= 0) {
                 theSnakeIsAlive = false;
-                setSpeed(0);
                 Globals.getInstance().display.remove(head);
-                System.out.println("Game Over for the Second!");
+                setSpeed(0);
+                System.out.println("One of the Snakes is DIED!");
                 Globals.getInstance().deadSnakeIncrement();
             }
         }
@@ -143,8 +133,7 @@ public class Snake implements Animatable {
 
     private void checkGameOver() {
         if (Globals.getInstance().getDeadSnakeNumber() == numberOfSnakes) {
-            System.out.println("Game Over!" + snakeBodyLenght);
-            System.out.println("number of snakes: " + numberOfSnakes);
+            System.out.println("Game Over! \n The Snakebody's length: " + snakeBodyLength);
             Globals.getInstance().stopGame();
         }
     }
