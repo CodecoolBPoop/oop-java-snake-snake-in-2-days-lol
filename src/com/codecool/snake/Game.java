@@ -1,6 +1,10 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.NavEnemy;
+import com.codecool.snake.entities.enemies.PoliceCapEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.DollarPowerUp;
+import com.codecool.snake.entities.powerups.MoneyBagPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
@@ -11,6 +15,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 
 import java.util.Optional;
 
@@ -42,7 +48,10 @@ public class Game extends Pane {
         }
 
         spawnEnemies(4);
-        spawnPowerUps(4);
+        spawnPowerUps(2);
+        spawnMoneyBagPowerUps(2);
+
+        setTableBackground(Globals.backgroundImage);
 
         GameLoop gameLoop = new GameLoop(snake, snake2);
         Globals.getInstance().setGameLoop(gameLoop);
@@ -56,20 +65,27 @@ public class Game extends Pane {
     }
 
     private void spawnSnake() {
-        snake = new Snake(new Vec2d(500, 500));
+        snake = new Snake(new Vec2d(700, 500));
     }
 
     private void spawnSnake2() {
-        snake2 = new Snake(new Vec2d(400, 400));
+        snake2 = new Snake(new Vec2d(300, 400), true);
         snake2.secondSnakeDiretionSetter();
     }
 
     private void spawnEnemies(int numberOfEnemies) {
-        for (int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
+        for (int i = 0; i < numberOfEnemies; ++i){
+            //new SimpleEnemy();
+            new PoliceCapEnemy();
+            new NavEnemy();
+        }
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {
-        for (int i = 0; i < numberOfPowerUps; ++i) new SimplePowerUp();
+        for (int i = 0; i < numberOfPowerUps; ++i) {
+            new SimplePowerUp();
+            new DollarPowerUp();
+        }
     }
 
     private void setupInputHandling() {
@@ -102,5 +118,18 @@ public class Game extends Pane {
         } else {
             return playAsSingle;
         }
+    }
+
+    private void spawnMoneyBagPowerUps(int numberOfPowerUps) {
+        for (int i = 0; i < numberOfPowerUps; ++i) {
+            new MoneyBagPowerUp();
+        }
+    }
+
+    public void setTableBackground(Image tableBackground) {
+        setBackground(new Background(new BackgroundImage(tableBackground,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+
     }
 }
