@@ -48,7 +48,7 @@ public class Game extends Pane {
         }
 
         spawnEnemies(4);
-        spawnPowerUps(4);
+        spawnPowerUps(2);
         spawnMoneyBagPowerUps(2);
 
         setTableBackground(Globals.backgroundImage);
@@ -75,7 +75,7 @@ public class Game extends Pane {
 
     private void spawnEnemies(int numberOfEnemies) {
         for (int i = 0; i < numberOfEnemies; ++i){
-            new SimpleEnemy();
+            //new SimpleEnemy();
             new PoliceCapEnemy();
             new NavEnemy();
         }

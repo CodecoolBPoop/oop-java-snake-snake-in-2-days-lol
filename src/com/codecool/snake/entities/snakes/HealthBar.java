@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class HealthBar extends GameEntity {
 
-    private double baseHealth = 200.0;
+    private double baseHealth = 100.0;
 
     HealthBar(boolean green){
         if (green) {
@@ -38,8 +38,12 @@ public class HealthBar extends GameEntity {
     }
 
     public void changeGreenHealth(double value){
-        System.out.println("DAMAGED");
-        baseHealth -= value*2;
-        setFitWidth(baseHealth-value*2);
+        if(baseHealth + value > 100){
+            baseHealth = 100;
+            setFitWidth(100);
+        } else {
+            baseHealth += value;
+            setFitWidth(baseHealth + value);
+        }
     }
 }
