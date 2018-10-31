@@ -13,7 +13,7 @@ import javax.sound.midi.SysexMessage;
 
 
 public class Snake implements Animatable {
-    private static float speed = 2;
+    private float speed = 2;
     private int health = 100;
     private KeyCode leftDir = KeyCode.LEFT;
     private KeyCode rightDir = KeyCode.RIGHT;
@@ -21,9 +21,10 @@ public class Snake implements Animatable {
     private int snakeBodyLenght = 0;
     private static int numberOfSnakes = 0;
     private int snakeNumber;
+    private boolean theSnakeIsAlive;
 
-    public static void setSpeed(float speed) {
-        Snake.speed = speed;
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     private SnakeHead head;
@@ -35,6 +36,7 @@ public class Snake implements Animatable {
         body = new DelayedModificationList<>();
         numberOfSnakes++;
         snakeNumber = numberOfSnakes;
+        theSnakeIsAlive = true;
 
         addPart(4);
     }
@@ -90,20 +92,13 @@ public class Snake implements Animatable {
     }
 
     private void checkForDeathCondition() {
-        if (snakeNumber == 1) {
+        if (theSnakeIsAlive) {
             if (head.isOutOfBounds() || health <= 0) {
-                System.out.println("Game Over for the First!");
+                theSnakeIsAlive = false;
                 setSpeed(0);
-                Globals.getInstance().deadSnakeIncrement();
-                setSpeed(2);
-            }
-        } else if (snakeNumber == 2) {
-            if (head.isOutOfBounds() || health <= 0) {
                 Globals.getInstance().display.remove(head);
                 System.out.println("Game Over for the Second!");
-                setSpeed(0);
                 Globals.getInstance().deadSnakeIncrement();
-                setSpeed(2);
             }
         }
 
